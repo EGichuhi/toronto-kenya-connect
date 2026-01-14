@@ -11,6 +11,20 @@ import { Link } from "react-router-dom";
 import { Eye, EyeOff, Heart, Shield } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
+// Clerk import
+import { useSignUp } from "@clerk/clerk-react";
+
+const interests = [
+  "Dining & Fine Food",
+  "Dancing & Music",
+  "Travel & Adventure",
+  "Cultural Events",
+  "Quiet Evenings",
+  "Outdoor Activities",
+  "Arts & Theatre",
+  "Faith & Spirituality",
+];
+
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -27,16 +41,8 @@ const Register = () => {
     agreeTerms: false,
   });
 
-  const interests = [
-    "Dining & Fine Food",
-    "Dancing & Music",
-    "Travel & Adventure",
-    "Cultural Events",
-    "Quiet Evenings",
-    "Outdoor Activities",
-    "Arts & Theatre",
-    "Faith & Spirituality",
-  ];
+  // Clerk hook
+  const { isLoaded, signUp } = useSignUp();
 
   const handleInterestToggle = (interest: string) => {
     setFormData(prev => ({
@@ -49,7 +55,8 @@ const Register = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
+    // Client-side validation (keep your existing checks)
     const age = parseInt(formData.age);
     if (isNaN(age) || age < 45) {
       toast.error("You must be 45 years or older to join our community.");
@@ -66,10 +73,42 @@ const Register = () => {
       return;
     }
 
+    if (!isLoaded) {
+      toast.error("Authentication service not ready. Please try again.");
+      return;
+    }
+
     setIsLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    toast.success("Karibu! Your account has been created. Check your email to verify.");
-    setIsLoading(false);
+
+    try {
+      // Create user with Clerk
+      await signUp.create({
+        emailAddress: formData.email.trim(),
+        password: formData.password,
+        firstName: formData.firstName.trim(),
+        lastName: formData.lastName.trim(),
+        // Optional: add custom metadata if you want to store extra data
+        // publicMetadata: {
+        //   phone: formData.phone,
+        //   age: age,
+        //   gender: formData.gender,
+        //   lookingFor: formData.lookingFor,
+        //   interests: formData.interests,
+        // }
+      });
+
+      // Success: Clerk may require email verification — show message
+      toast.success("Karibu! Your account has been created. Check your email to verify.");
+      
+      // Optional: redirect to login after success
+      // navigate("/login");
+    } catch (err: any) {
+      // Clerk error handling (nice messages)
+      const errorMsg = err.errors?.[0]?.message || "Registration failed. Please try again.";
+      toast.error(errorMsg);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

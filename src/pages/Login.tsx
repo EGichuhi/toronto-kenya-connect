@@ -6,9 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Link, useNavigate } from "react-router-dom";  // ← add useNavigate
+import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
-import { useSignIn } from "@clerk/clerk-react";  // ← NEW: Clerk hook
+import { useSignIn } from "@clerk/clerk-react";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,16 +18,20 @@ const Login = () => {
     password: "",
   });
 
-  const { isLoaded, signIn } = useSignIn();  // ← NEW: Clerk signIn hook
-  const navigate = useNavigate();  // ← NEW: for redirect after success
+  const { isLoaded, signIn } = useSignIn();
+  const navigate = useNavigate();
+
+  // Show loading while Clerk initializes (prevents hook errors)
+  if (!isLoaded) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <p className="text-lg text-muted-foreground">Loading authentication...</p>
+      </div>
+    );
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!isLoaded) {
-      toast.error("Authentication not ready yet. Please try again.");
-      return;
-    }
 
     setIsLoading(true);
 
@@ -38,15 +42,13 @@ const Login = () => {
       });
 
       if (result.status === "complete") {
-        // Clerk has created the session — user is now signed in
         toast.success("Karibu tena! Welcome back.");
-        navigate("/");  // Redirect to home or dashboard
+        navigate("/"); // Redirect to home
       } else {
-        // Rare case: multi-factor or other verification needed
+        // Handle rare cases like MFA (multi-factor auth) if enabled later
         toast.info("Additional verification required — check your email.");
       }
     } catch (err: any) {
-      // Clerk provides nice error messages in err.errors
       const errorMessage =
         err.errors?.[0]?.message ||
         err.message ||
