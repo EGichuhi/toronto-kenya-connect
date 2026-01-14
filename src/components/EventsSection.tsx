@@ -9,9 +9,9 @@ const upcomingEvents = [
   {
     id: 1,
     title: "Singles Wine & Dine Evening",
-    date: "February 15, 2026",
+    date: "January 30, 2026",
     time: "7:00 PM - 10:00 PM",
-    location: "The Kenyan Kitchen, Scarborough",
+    location: "TBD",
     description: "An intimate dinner mixer for singles. Enjoy nyama choma while meeting interesting people in a relaxed, elegant setting.",
     image: dinnerImage,
     spots: 8,
@@ -21,9 +21,9 @@ const upcomingEvents = [
   {
     id: 2,
     title: "Speed Dating & Chai",
-    date: "February 28, 2026",
+    date: "February 7, 2026",
     time: "3:00 PM - 6:00 PM",
-    location: "Community Centre, North York",
+    location: "TBD",
     description: "A fun afternoon of speed dating over chai and mandazi. Meet up to 15 potential matches in a structured, comfortable format.",
     image: cuisineImage,
     spots: 12,
