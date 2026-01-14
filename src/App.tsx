@@ -17,7 +17,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter basename="/toronto-kenya-connect">   {/* ← Add this! No trailing slash here */}
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/events" element={<Events />} />
