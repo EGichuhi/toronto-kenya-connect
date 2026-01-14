@@ -205,10 +205,6 @@ const Register = () => {
                         <RadioGroupItem value="woman" id="looking-woman" />
                         <Label htmlFor="looking-woman" className="font-normal cursor-pointer">Women</Label>
                       </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="both" id="looking-both" />
-                        <Label htmlFor="looking-both" className="font-normal cursor-pointer">Both</Label>
-                      </div>
                     </RadioGroup>
                   </div>
 

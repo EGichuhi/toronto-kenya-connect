@@ -6,8 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";  // ← add useNavigate
 import { Eye, EyeOff } from "lucide-react";
+import { useSignIn } from "@clerk/clerk-react";  // ← NEW: Clerk hook
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -17,14 +18,44 @@ const Login = () => {
     password: "",
   });
 
+  const { isLoaded, signIn } = useSignIn();  // ← NEW: Clerk signIn hook
+  const navigate = useNavigate();  // ← NEW: for redirect after success
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!isLoaded) {
+      toast.error("Authentication not ready yet. Please try again.");
+      return;
+    }
+
     setIsLoading(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    toast.success("Karibu tena! Welcome back.");
-    setIsLoading(false);
+
+    try {
+      const result = await signIn.create({
+        identifier: formData.email.trim(),
+        password: formData.password,
+      });
+
+      if (result.status === "complete") {
+        // Clerk has created the session — user is now signed in
+        toast.success("Karibu tena! Welcome back.");
+        navigate("/");  // Redirect to home or dashboard
+      } else {
+        // Rare case: multi-factor or other verification needed
+        toast.info("Additional verification required — check your email.");
+      }
+    } catch (err: any) {
+      // Clerk provides nice error messages in err.errors
+      const errorMessage =
+        err.errors?.[0]?.message ||
+        err.message ||
+        "Invalid email or password. Please try again.";
+
+      toast.error(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

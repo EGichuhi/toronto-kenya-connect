@@ -40,8 +40,6 @@ export function Footer() {
               {[
                 { href: "/events", label: "Upcoming Events" },
                 { href: "/how-it-works", label: "How It Works" },
-                { href: "/success-stories", label: "Success Stories" },
-                { href: "/about", label: "About Us" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link 
@@ -62,8 +60,6 @@ export function Footer() {
               {[
                 { href: "/support#faq", label: "FAQs" },
                 { href: "/support#contact", label: "Contact Us" },
-                { href: "/safety", label: "Safety Tips" },
-                { href: "/privacy", label: "Privacy Policy" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link 

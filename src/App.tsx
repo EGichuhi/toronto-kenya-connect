@@ -9,6 +9,10 @@ import Support from "./pages/Support";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
+import './App.css'
+
+// Clerk imports
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
 
 const queryClient = new QueryClient();
 
@@ -17,7 +21,8 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename="/toronto-kenya-connect">   {/* ← Add this! No trailing slash here */}
+
+      <BrowserRouter basename="/toronto-kenya-connect">
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/events" element={<Events />} />

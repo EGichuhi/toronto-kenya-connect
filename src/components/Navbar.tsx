@@ -4,6 +4,9 @@ import { Menu, X, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+// Clerk imports
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
+
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/events", label: "Events" },
@@ -47,14 +50,31 @@ export function Navbar() {
             ))}
           </nav>
 
-          {/* Desktop CTA */}
+          {/* Desktop Auth Controls (Clerk) */}
           <div className="hidden md:flex items-center gap-3">
-            <Button variant="ghost" asChild>
-              <Link to="/login">Sign In</Link>
-            </Button>
-            <Button asChild>
-              <Link to="/register">Join Free</Link>
-            </Button>
+            <SignedOut>
+              <SignInButton mode="modal">
+                <Button variant="ghost" className="text-muted-foreground hover:text-foreground">
+                  Sign In
+                </Button>
+              </SignInButton>
+
+              <SignUpButton mode="modal">
+                <Button>Join Free</Button>
+              </SignUpButton>
+            </SignedOut>
+
+            <SignedIn>
+              <UserButton 
+                afterSignOutUrl="/"
+                appearance={{
+                  elements: {
+                    userButtonPopoverCard: "bg-background border-border shadow-lg",
+                    // Optional: customize avatar or text if needed
+                  }
+                }}
+              />
+            </SignedIn>
           </div>
 
           {/* Mobile Menu Button */}
@@ -87,13 +107,35 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
+
+            {/* Mobile Auth Controls (Clerk) */}
             <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-border">
-              <Button variant="outline" asChild className="w-full">
-                <Link to="/login">Sign In</Link>
-              </Button>
-              <Button asChild className="w-full">
-                <Link to="/register">Join Free</Link>
-              </Button>
+              <SignedOut>
+                <SignInButton mode="modal">
+                  <Button variant="outline" className="w-full">
+                    Sign In
+                  </Button>
+                </SignInButton>
+
+                <SignUpButton mode="modal">
+                  <Button className="w-full">
+                    Join Free
+                  </Button>
+                </SignUpButton>
+              </SignedOut>
+
+              <SignedIn>
+                <div className="w-full flex justify-center py-2">
+                  <UserButton 
+                    afterSignOutUrl="/"
+                    appearance={{
+                      elements: {
+                        userButtonPopoverCard: "bg-background border-border shadow-lg",
+                      }
+                    }}
+                  />
+                </div>
+              </SignedIn>
             </div>
           </nav>
         </div>
