@@ -9,7 +9,7 @@ export function HeroSection() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src={heroImage}
+          src={assests/hero-kenya.jpg}
           alt="Kenyan savanna at sunset"
           className="w-full h-full object-cover"
         />
