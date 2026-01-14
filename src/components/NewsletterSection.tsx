@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Heart } from "lucide-react";
 
 export function NewsletterSection() {
   const [email, setEmail] = useState("");
@@ -12,9 +13,8 @@ export function NewsletterSection() {
     if (!email) return;
 
     setIsLoading(true);
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
-    toast.success("Asante! You've been subscribed to our newsletter.");
+    toast.success("You're on the list! We'll notify you of upcoming events.");
     setEmail("");
     setIsLoading(false);
   };
@@ -23,12 +23,13 @@ export function NewsletterSection() {
     <section className="py-20 bg-gradient-to-r from-primary via-secondary to-accent">
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto text-center">
+          <Heart className="w-12 h-12 text-primary-foreground mx-auto mb-4" />
           <h2 className="font-display text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
-            Stay Connected
+            Don't Miss Out
           </h2>
           <p className="text-primary-foreground/80 mb-8 leading-relaxed">
-            Get updates on upcoming events, cultural news, and community 
-            highlights delivered to your inbox.
+            Be the first to know about upcoming mixer events, exclusive gatherings, 
+            and community news. Your next connection could be one event away.
           </p>
           
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
@@ -47,7 +48,7 @@ export function NewsletterSection() {
               disabled={isLoading}
               className="shrink-0"
             >
-              {isLoading ? "Subscribing..." : "Subscribe"}
+              {isLoading ? "Joining..." : "Join Waitlist"}
             </Button>
           </form>
 

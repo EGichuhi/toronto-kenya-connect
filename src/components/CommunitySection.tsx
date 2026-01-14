@@ -1,29 +1,37 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Heart, Users, Shield, MessageCircle } from "lucide-react";
+import { Heart, Shield, Users, Sparkles, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const features = [
   {
-    icon: Heart,
-    title: "Authentic Connections",
-    description: "Meet fellow Kenyans who share your experiences, memories, and love for home.",
+    icon: Shield,
+    title: "Verified Members",
+    description: "Every member is verified to ensure authentic, serious connections.",
   },
   {
     icon: Users,
-    title: "Age-Appropriate Community",
-    description: "Designed specifically for mature members 45+, with events tailored to your interests.",
+    title: "45+ Community",
+    description: "Connect with mature singles who understand your life stage and values.",
   },
   {
-    icon: Shield,
-    title: "Safe & Welcoming",
-    description: "Moderated spaces ensuring respectful, meaningful interactions.",
+    icon: Heart,
+    title: "Cultural Match",
+    description: "Share your Kenyan heritage with someone who truly understands it.",
   },
   {
-    icon: MessageCircle,
-    title: "Stay Connected",
-    description: "Online forums and group chats to keep the conversation going between events.",
+    icon: Sparkles,
+    title: "Quality Events",
+    description: "Elegant mixers and dinners designed for meaningful introductions.",
   },
+];
+
+const benefits = [
+  "Meet accomplished professionals like yourself",
+  "In-person events in safe, upscale venues",
+  "Respect for tradition and family values",
+  "Active, engaged community",
+  "Discreet and confidential",
 ];
 
 export function CommunitySection() {
@@ -35,44 +43,61 @@ export function CommunitySection() {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-sm font-semibold text-secondary uppercase tracking-wider">
-            Our Community
-          </span>
-          <h2 className="font-display text-3xl md:text-4xl font-bold mt-3 mb-4">
-            More Than Just Dinners
-          </h2>
-          <p className="text-primary-foreground/70 leading-relaxed">
-            Join a thriving community of Kenyan expatriates who support each other, 
-            celebrate together, and keep our culture alive in Toronto.
-          </p>
-        </div>
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left Side - Content */}
+          <div className="space-y-8">
+            <div>
+              <span className="text-sm font-semibold text-secondary uppercase tracking-wider">
+                Why Nyumbani?
+              </span>
+              <h2 className="font-display text-3xl md:text-4xl font-bold mt-3 mb-4">
+                Dating Done Right
+              </h2>
+              <p className="text-primary-foreground/70 leading-relaxed text-lg">
+                We understand that finding love at this stage of life is different. 
+                That's why we've created a space specifically for accomplished 
+                Kenyans in Toronto who are ready for meaningful connections.
+              </p>
+            </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {features.map((feature, index) => (
-            <Card 
-              key={index} 
-              className="bg-primary-foreground/5 border-primary-foreground/10 backdrop-blur-sm text-primary-foreground"
-            >
-              <CardContent className="pt-6 text-center">
-                <div className="w-14 h-14 rounded-2xl bg-secondary/20 flex items-center justify-center mx-auto mb-4">
-                  <feature.icon className="w-7 h-7 text-secondary" />
-                </div>
-                <h3 className="font-display text-lg font-semibold mb-2">
-                  {feature.title}
-                </h3>
-                <p className="text-sm text-primary-foreground/60 leading-relaxed">
-                  {feature.description}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+            <ul className="space-y-3">
+              {benefits.map((benefit, index) => (
+                <li key={index} className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-secondary shrink-0" />
+                  <span className="text-primary-foreground/80">{benefit}</span>
+                </li>
+              ))}
+            </ul>
 
-        <div className="text-center">
-          <Button variant="warm" size="lg" asChild>
-            <Link to="/community">Join the Community</Link>
-          </Button>
+            <Button variant="warm" size="lg" asChild>
+              <Link to="/register">
+                <Heart className="w-4 h-4 mr-2" />
+                Join Free Today
+              </Link>
+            </Button>
+          </div>
+
+          {/* Right Side - Feature Cards */}
+          <div className="grid sm:grid-cols-2 gap-4">
+            {features.map((feature, index) => (
+              <Card 
+                key={index} 
+                className="bg-primary-foreground/5 border-primary-foreground/10 backdrop-blur-sm text-primary-foreground"
+              >
+                <CardContent className="pt-6">
+                  <div className="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center mb-4">
+                    <feature.icon className="w-6 h-6 text-secondary" />
+                  </div>
+                  <h3 className="font-display text-lg font-semibold mb-2">
+                    {feature.title}
+                  </h3>
+                  <p className="text-sm text-primary-foreground/60 leading-relaxed">
+                    {feature.description}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
     </section>

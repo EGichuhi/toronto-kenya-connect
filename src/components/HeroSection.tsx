@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Heart } from "lucide-react";
 import heroImage from "@/assets/hero-kenya.jpg";
 
 export function HeroSection() {
@@ -20,31 +21,34 @@ export function HeroSection() {
         <div className="max-w-4xl mx-auto space-y-8 animate-fade-up">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20">
-            <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
+            <Heart className="w-4 h-4 text-secondary fill-secondary" />
             <span className="text-sm font-medium text-primary-foreground">
-              For Kenyans 45+ in Toronto
+              Exclusive Dating for Kenyans 45+ in Toronto
             </span>
           </div>
 
           {/* Headline */}
           <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground leading-tight">
-            Karibu Nyumbani
-            <span className="block text-secondary mt-2">Welcome Home</span>
+            Find Your
+            <span className="block text-secondary mt-2">Kindred Spirit</span>
           </h1>
 
           {/* Subheadline */}
           <p className="text-lg md:text-xl text-primary-foreground/80 max-w-2xl mx-auto leading-relaxed">
-            Reconnect with your roots through authentic Kenyan dinners, cultural 
-            celebrations, and a vibrant community of fellow expatriates in Toronto.
+            Connect with accomplished Kenyan singles in Toronto who share your 
+            values, culture, and life experience. Real connections start here.
           </p>
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <Button variant="hero" size="xl" asChild>
-              <Link to="/events">View Upcoming Events</Link>
+              <Link to="/register">
+                <Heart className="w-5 h-5 mr-2" />
+                Start Your Journey
+              </Link>
             </Button>
             <Button variant="heroOutline" size="xl" asChild>
-              <Link to="/register">Join Our Community</Link>
+              <Link to="/events">Browse Mixer Events</Link>
             </Button>
           </div>
 
@@ -64,9 +68,9 @@ export function HeroSection() {
               <span>500+ members</span>
             </div>
             <div className="hidden sm:block w-px h-4 bg-primary-foreground/30" />
-            <span>50+ events hosted</span>
+            <span>150+ successful matches</span>
             <div className="hidden sm:block w-px h-4 bg-primary-foreground/30" />
-            <span>Est. 2020</span>
+            <span>Safe & verified</span>
           </div>
         </div>
       </div>

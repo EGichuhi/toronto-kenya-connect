@@ -1,29 +1,33 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Music, Utensils, BookOpen, Palette } from "lucide-react";
+import { Heart, MessageCircle, Calendar, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import cultureImage from "@/assets/cultural-dance.jpg";
 
-const activities = [
+const steps = [
   {
-    icon: Music,
-    title: "Traditional Music & Dance",
-    description: "Experience the rhythms of Kenya through live performances of Benga, Taarab, and traditional folk songs. Learn iconic dances from various tribes.",
+    number: "01",
+    icon: Users,
+    title: "Create Your Profile",
+    description: "Sign up and tell us about yourself—your interests, values, and what you're looking for in a partner.",
   },
   {
-    icon: Utensils,
-    title: "Cooking Demonstrations",
-    description: "Master the art of Kenyan cuisine with hands-on cooking sessions. Learn to make perfect ugali, pilau, and other beloved dishes.",
+    number: "02",
+    icon: Calendar,
+    title: "Attend Our Events",
+    description: "Join curated mixer dinners, speed dating nights, and cultural celebrations to meet singles in person.",
   },
   {
-    icon: BookOpen,
-    title: "Storytelling Evenings",
-    description: "Gather around for tales of folklore, proverbs, and personal journeys. Share your own story and connect through narrative.",
+    number: "03",
+    icon: MessageCircle,
+    title: "Connect & Chat",
+    description: "After events, connect with those who caught your eye through our secure messaging platform.",
   },
   {
-    icon: Palette,
-    title: "Arts & Crafts",
-    description: "Explore Kenyan artistry through beadwork, basket weaving, and kikoi fabric crafts. Take home your own handmade creations.",
+    number: "04",
+    icon: Heart,
+    title: "Find Your Match",
+    description: "Build meaningful relationships with compatible Kenyan singles who share your journey.",
   },
 ];
 
@@ -33,20 +37,35 @@ export function CultureSection() {
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Image Side */}
-          <div className="relative">
+          <div className="relative order-2 lg:order-1">
             <div className="relative rounded-2xl overflow-hidden shadow-elevated">
               <img
                 src={cultureImage}
-                alt="Traditional Kenyan dancers"
+                alt="Community celebration"
                 className="w-full h-[500px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
               <div className="absolute bottom-6 left-6 right-6">
-                <p className="text-primary-foreground font-display text-2xl font-semibold">
-                  Preserving Our Heritage
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="flex -space-x-3">
+                    {["JM", "WK", "GO"].map((initials, i) => (
+                      <div
+                        key={i}
+                        className="w-10 h-10 rounded-full bg-secondary border-2 border-foreground/50 flex items-center justify-center text-xs font-semibold text-secondary-foreground"
+                      >
+                        {initials}
+                      </div>
+                    ))}
+                  </div>
+                  <span className="text-primary-foreground text-sm">
+                    Recently matched
+                  </span>
+                </div>
+                <p className="text-primary-foreground font-display text-xl font-semibold">
+                  "We met at a Nyumbani dinner. Six months later, we're inseparable."
                 </p>
-                <p className="text-primary-foreground/80 text-sm mt-2">
-                  Every event features authentic cultural experiences
+                <p className="text-primary-foreground/70 text-sm mt-1">
+                  — James & Mary, Toronto
                 </p>
               </div>
             </div>
@@ -56,41 +75,43 @@ export function CultureSection() {
           </div>
 
           {/* Content Side */}
-          <div className="space-y-8">
+          <div className="space-y-8 order-1 lg:order-2">
             <div>
               <span className="text-sm font-semibold text-primary uppercase tracking-wider">
-                Cultural Activities
+                How It Works
               </span>
               <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-3 mb-4">
-                Reconnect With Your Roots
+                Your Path to Connection
               </h2>
               <p className="text-muted-foreground leading-relaxed">
-                Our dinners are more than just meals—they're immersive cultural 
-                experiences that celebrate Kenya's rich heritage and bring our 
-                traditions to life in Toronto.
+                We believe the best connections happen in person. That's why we focus 
+                on bringing people together at carefully curated events.
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-4">
-              {activities.map((activity, index) => (
-                <Card key={index} variant="flat" className="bg-background/50 backdrop-blur-sm">
-                  <CardHeader className="pb-2">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-2">
-                      <activity.icon className="w-5 h-5 text-primary" />
+            <div className="space-y-6">
+              {steps.map((step, index) => (
+                <div key={index} className="flex gap-4">
+                  <div className="shrink-0">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                      <step.icon className="w-5 h-5 text-primary" />
                     </div>
-                    <CardTitle className="text-base">{activity.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-xs leading-relaxed">
-                      {activity.description}
-                    </CardDescription>
-                  </CardContent>
-                </Card>
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-xs font-bold text-secondary">{step.number}</span>
+                      <h3 className="font-display text-lg font-semibold">{step.title}</h3>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
               ))}
             </div>
 
             <Button size="lg" asChild>
-              <Link to="/culture">Explore All Activities</Link>
+              <Link to="/register">Get Started Free</Link>
             </Button>
           </div>
         </div>

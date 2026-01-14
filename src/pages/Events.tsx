@@ -2,7 +2,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Calendar, MapPin, Clock, Users, Filter } from "lucide-react";
+import { Calendar, MapPin, Clock, Users, Filter, Heart } from "lucide-react";
 import { useState } from "react";
 import dinnerImage from "@/assets/dinner-gathering.jpg";
 import cuisineImage from "@/assets/kenyan-cuisine.jpg";
@@ -11,83 +11,84 @@ import cultureImage from "@/assets/cultural-dance.jpg";
 const allEvents = [
   {
     id: 1,
-    title: "Nyama Choma Night",
+    title: "Singles Wine & Dine Evening",
     date: "February 15, 2026",
-    time: "6:00 PM - 10:00 PM",
+    time: "7:00 PM - 10:00 PM",
     location: "The Kenyan Kitchen, Scarborough",
-    description: "Join us for an evening of authentic grilled meats, ugali, and sukuma wiki. Live music and storytelling included.",
+    description: "An intimate dinner mixer for singles. Enjoy nyama choma while meeting interesting people in a relaxed, elegant setting.",
     image: dinnerImage,
-    spots: 12,
-    price: 45,
-    category: "dinner",
+    spots: 8,
+    price: 55,
+    category: "mixer",
   },
   {
     id: 2,
-    title: "Chapati & Chai Social",
+    title: "Speed Dating & Chai",
     date: "February 28, 2026",
     time: "3:00 PM - 6:00 PM",
     location: "Community Centre, North York",
-    description: "A cozy afternoon of chai, fresh chapatis, and connecting with fellow Kenyans. Perfect for newcomers!",
+    description: "A fun afternoon of speed dating over chai and mandazi. Meet up to 15 potential matches in a structured, comfortable format.",
     image: cuisineImage,
-    spots: 20,
-    price: 25,
-    category: "social",
+    spots: 12,
+    price: 35,
+    category: "speed-dating",
   },
   {
     id: 3,
-    title: "Mashujaa Day Celebration",
-    date: "March 14, 2026",
-    time: "5:00 PM - 11:00 PM",
+    title: "Valentine's Gala Night",
+    date: "February 14, 2026",
+    time: "6:00 PM - 11:00 PM",
     location: "African Palace, Etobicoke",
-    description: "Celebrate our heroes with traditional dances, poetry, and a feast featuring dishes from all 47 counties.",
+    description: "Our signature Valentine's event with live music, dancing, and a gourmet dinner. Come single, leave with connections.",
     image: cultureImage,
-    spots: 8,
-    price: 65,
-    category: "cultural",
+    spots: 6,
+    price: 85,
+    category: "gala",
   },
   {
     id: 4,
-    title: "Kikuyu Language Evening",
-    date: "March 21, 2026",
-    time: "6:00 PM - 8:30 PM",
-    location: "Community Centre, North York",
-    description: "Practice and preserve our mother tongue. Open to all skill levels - from fluent speakers to beginners.",
-    image: dinnerImage,
+    title: "Salsa & Afrobeats Dance Night",
+    date: "March 7, 2026",
+    time: "8:00 PM - 11:00 PM",
+    location: "Dance Studio, Downtown Toronto",
+    description: "Learn to dance while meeting new people. No partner needed—that's the point! Includes refreshments.",
+    image: cultureImage,
     spots: 15,
-    price: 15,
-    category: "cultural",
+    price: 40,
+    category: "social",
   },
   {
     id: 5,
-    title: "Easter Mandazi Brunch",
-    date: "April 5, 2026",
+    title: "Brunch & Mingle",
+    date: "March 15, 2026",
     time: "11:00 AM - 2:00 PM",
     location: "Riverside Event Hall, Mississauga",
-    description: "Celebrate Easter with a delicious brunch featuring mandazi, samosas, and traditional dishes.",
+    description: "A relaxed Sunday brunch mixer with live acoustic music. Perfect for meaningful daytime conversations.",
     image: cuisineImage,
-    spots: 30,
-    price: 35,
-    category: "dinner",
+    spots: 20,
+    price: 45,
+    category: "mixer",
   },
   {
     id: 6,
-    title: "Beadwork Workshop",
-    date: "April 12, 2026",
-    time: "2:00 PM - 5:00 PM",
-    location: "Craft Studio, Downtown Toronto",
-    description: "Learn the intricate art of Maasai beadwork. Create your own jewelry to take home.",
-    image: cultureImage,
+    title: "Cooking Class for Singles",
+    date: "March 22, 2026",
+    time: "4:00 PM - 7:00 PM",
+    location: "Culinary Studio, North York",
+    description: "Learn to make pilau together! Pair up to cook, then enjoy the meal you created. Great icebreaker activity.",
+    image: dinnerImage,
     spots: 10,
-    price: 40,
-    category: "cultural",
+    price: 50,
+    category: "social",
   },
 ];
 
 const categories = [
   { value: "all", label: "All Events" },
-  { value: "dinner", label: "Dinners" },
-  { value: "social", label: "Social" },
-  { value: "cultural", label: "Cultural" },
+  { value: "mixer", label: "Dinner Mixers" },
+  { value: "speed-dating", label: "Speed Dating" },
+  { value: "gala", label: "Galas" },
+  { value: "social", label: "Social Activities" },
 ];
 
 const Events = () => {
@@ -107,14 +108,14 @@ const Events = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-2xl">
               <span className="text-sm font-semibold text-primary uppercase tracking-wider">
-                Events & Gatherings
+                Singles Events
               </span>
               <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mt-3 mb-4">
-                Upcoming Events
+                Meet Your Match
               </h1>
               <p className="text-muted-foreground text-lg leading-relaxed">
-                Browse our calendar of cultural celebrations, delicious dinners, 
-                and community gatherings. Reserve your spot today!
+                Our carefully curated events bring together like-minded Kenyan singles 
+                in elegant, comfortable settings designed for genuine connections.
               </p>
             </div>
           </div>
@@ -158,8 +159,12 @@ const Events = () => {
                     <div className="absolute top-4 right-4 bg-secondary text-secondary-foreground px-3 py-1 rounded-full text-sm font-semibold">
                       ${event.price}
                     </div>
-                    <div className="absolute top-4 left-4 bg-primary/90 text-primary-foreground px-3 py-1 rounded-full text-xs font-medium capitalize">
-                      {event.category}
+                    <div className="absolute top-4 left-4 bg-primary/90 text-primary-foreground px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                      <Heart className="w-3 h-3" />
+                      {event.category === "mixer" && "Dinner Mixer"}
+                      {event.category === "speed-dating" && "Speed Dating"}
+                      {event.category === "gala" && "Gala Event"}
+                      {event.category === "social" && "Social"}
                     </div>
                   </div>
 
@@ -183,12 +188,12 @@ const Events = () => {
                     </div>
                     <div className="flex items-center gap-2 text-sm text-accent font-medium">
                       <Users className="w-4 h-4" />
-                      {event.spots} spots remaining
+                      Only {event.spots} spots left
                     </div>
                   </CardContent>
 
                   <CardFooter>
-                    <Button className="w-full">RSVP Now</Button>
+                    <Button className="w-full">Reserve My Spot</Button>
                   </CardFooter>
                 </Card>
               ))}

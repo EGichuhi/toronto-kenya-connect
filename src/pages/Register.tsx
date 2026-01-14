@@ -8,7 +8,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Heart, Shield } from "lucide-react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -19,20 +20,22 @@ const Register = () => {
     email: "",
     phone: "",
     age: "",
+    gender: "",
+    lookingFor: "",
     password: "",
     interests: [] as string[],
     agreeTerms: false,
   });
 
-  const culturalInterests = [
-    "Traditional Music",
-    "Cooking & Cuisine",
-    "Storytelling",
-    "Dance",
-    "Arts & Crafts",
-    "Language Preservation",
-    "Community Service",
-    "Networking",
+  const interests = [
+    "Dining & Fine Food",
+    "Dancing & Music",
+    "Travel & Adventure",
+    "Cultural Events",
+    "Quiet Evenings",
+    "Outdoor Activities",
+    "Arts & Theatre",
+    "Faith & Spirituality",
   ];
 
   const handleInterestToggle = (interest: string) => {
@@ -47,10 +50,14 @@ const Register = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Basic validation
     const age = parseInt(formData.age);
     if (isNaN(age) || age < 45) {
       toast.error("You must be 45 years or older to join our community.");
+      return;
+    }
+
+    if (!formData.gender || !formData.lookingFor) {
+      toast.error("Please select your gender and who you're looking for.");
       return;
     }
 
@@ -60,9 +67,8 @@ const Register = () => {
     }
 
     setIsLoading(true);
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500));
-    toast.success("Karibu! Your account has been created. Please check your email to verify.");
+    toast.success("Karibu! Your account has been created. Check your email to verify.");
     setIsLoading(false);
   };
 
@@ -75,15 +81,15 @@ const Register = () => {
           <div className="max-w-2xl mx-auto">
             {/* Header */}
             <div className="text-center mb-10">
-              <span className="text-sm font-semibold text-primary uppercase tracking-wider">
-                Join Our Community
-              </span>
-              <h1 className="font-display text-4xl font-bold text-foreground mt-3 mb-4">
-                Create Your Account
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+                <Heart className="w-8 h-8 text-primary" />
+              </div>
+              <h1 className="font-display text-4xl font-bold text-foreground mb-4">
+                Begin Your Journey
               </h1>
               <p className="text-muted-foreground">
-                Become part of Toronto's vibrant Kenyan community. 
-                Already have an account?{" "}
+                Join Toronto's exclusive community for Kenyan singles 45+. 
+                Already a member?{" "}
                 <Link to="/login" className="text-primary hover:underline">
                   Sign in here
                 </Link>
@@ -92,9 +98,10 @@ const Register = () => {
 
             <Card variant="elevated">
               <CardHeader>
-                <CardTitle>Registration Form</CardTitle>
-                <CardDescription>
-                  Fill in your details below. All fields marked with * are required.
+                <CardTitle>Create Your Profile</CardTitle>
+                <CardDescription className="flex items-center gap-2">
+                  <Shield className="w-4 h-4 text-accent" />
+                  Your information is secure and private
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -108,7 +115,7 @@ const Register = () => {
                         value={formData.firstName}
                         onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                         required
-                        placeholder="Enter your first name"
+                        placeholder="Your first name"
                       />
                     </div>
                     <div className="space-y-2">
@@ -118,7 +125,7 @@ const Register = () => {
                         value={formData.lastName}
                         onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                         required
-                        placeholder="Enter your last name"
+                        placeholder="Your last name"
                       />
                     </div>
                   </div>
@@ -163,6 +170,48 @@ const Register = () => {
                     </div>
                   </div>
 
+                  {/* Gender */}
+                  <div className="space-y-3">
+                    <Label>I am a *</Label>
+                    <RadioGroup
+                      value={formData.gender}
+                      onValueChange={(value) => setFormData({ ...formData, gender: value })}
+                      className="flex gap-4"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="man" id="man" />
+                        <Label htmlFor="man" className="font-normal cursor-pointer">Man</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="woman" id="woman" />
+                        <Label htmlFor="woman" className="font-normal cursor-pointer">Woman</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+
+                  {/* Looking For */}
+                  <div className="space-y-3">
+                    <Label>Looking for *</Label>
+                    <RadioGroup
+                      value={formData.lookingFor}
+                      onValueChange={(value) => setFormData({ ...formData, lookingFor: value })}
+                      className="flex gap-4"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="man" id="looking-man" />
+                        <Label htmlFor="looking-man" className="font-normal cursor-pointer">Men</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="woman" id="looking-woman" />
+                        <Label htmlFor="looking-woman" className="font-normal cursor-pointer">Women</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="both" id="looking-both" />
+                        <Label htmlFor="looking-both" className="font-normal cursor-pointer">Both</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+
                   {/* Password */}
                   <div className="space-y-2">
                     <Label htmlFor="password">Password *</Label>
@@ -186,14 +235,14 @@ const Register = () => {
                     </div>
                   </div>
 
-                  {/* Cultural Interests */}
+                  {/* Interests */}
                   <div className="space-y-3">
-                    <Label>Cultural Interests</Label>
+                    <Label>Interests & Hobbies</Label>
                     <p className="text-xs text-muted-foreground">
-                      Select the activities you're interested in (optional)
+                      Select what you enjoy (helps us match you better)
                     </p>
                     <div className="grid grid-cols-2 gap-2">
-                      {culturalInterests.map((interest) => (
+                      {interests.map((interest) => (
                         <label
                           key={interest}
                           className="flex items-center gap-2 p-3 rounded-lg border border-border hover:bg-muted/50 cursor-pointer transition-colors"
@@ -231,7 +280,7 @@ const Register = () => {
                   </div>
 
                   <Button type="submit" size="lg" className="w-full" disabled={isLoading}>
-                    {isLoading ? "Creating Account..." : "Create Account"}
+                    {isLoading ? "Creating Profile..." : "Create My Profile"}
                   </Button>
                 </form>
               </CardContent>
