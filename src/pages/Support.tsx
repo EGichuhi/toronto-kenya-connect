@@ -11,42 +11,42 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Mail, Phone, MessageCircle, HelpCircle } from "lucide-react";
+import { Mail, Phone, MessageCircle, HelpCircle, Shield } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
 const faqs = [
   {
-    question: "How do I join Nyumbani Toronto?",
-    answer: "Simply click the 'Join Us' button on our website and complete the registration form. You'll need to be 45 years or older and provide a valid email address for verification. Once verified, you'll have full access to our events and community features."
+    question: "How do I join Nyumbani?",
+    answer: "Click 'Join Free' and complete our registration form. You'll need to be 45 years or older and provide a valid email for verification. Once verified, you'll have access to browse events and connect with other members."
   },
   {
-    question: "What is the cost of membership?",
-    answer: "Membership to Nyumbani Toronto is free! However, individual events have their own pricing to cover venue, catering, and activity costs. Event fees typically range from $15-$65 depending on the type of gathering."
+    question: "Is membership really free?",
+    answer: "Yes! Creating a profile and browsing events is completely free. Individual events have their own pricing to cover venue, catering, and activities. Event fees typically range from $35-$85."
   },
   {
     question: "How do I pay for events?",
-    answer: "We accept payments via PayPal for all event RSVPs. When you register for an event, you'll be redirected to PayPal to complete your secure payment. You'll receive a confirmation email with your receipt and event details."
+    answer: "We accept payments via PayPal for all event reservations. When you RSVP, you'll be redirected to PayPal to complete your secure payment. You'll receive a confirmation email with your receipt and event details."
   },
   {
-    question: "What happens if I need to cancel my RSVP?",
-    answer: "We understand plans change. Cancellations made more than 48 hours before an event are eligible for a full refund. Cancellations within 48 hours may receive a partial refund or credit toward future events at our discretion."
+    question: "What if I need to cancel?",
+    answer: "Cancellations made more than 48 hours before an event are eligible for a full refund. Cancellations within 48 hours may receive credit toward future events at our discretion. Contact us for assistance."
   },
   {
-    question: "Are the events only for Kenyans?",
-    answer: "While our community is centered around Kenyan culture, we warmly welcome anyone interested in experiencing and celebrating Kenyan heritage. Partners, friends, and those curious about our culture are always welcome."
+    question: "Is this only for Kenyans?",
+    answer: "Our community is centered around Kenyan culture, but we welcome anyone of African heritage or those who appreciate and connect with Kenyan culture. What matters most is shared values and genuine connection."
   },
   {
-    question: "How can I suggest an event or activity?",
-    answer: "We love hearing from our members! Visit our Community forum to share your ideas, or use the contact form on this page to send us your suggestions directly. Many of our most popular events came from member suggestions."
+    question: "How are members verified?",
+    answer: "All members must verify their email and phone number. We review profiles for authenticity and may request additional verification for premium events. Our goal is a safe, genuine community."
   },
   {
-    question: "Is there a dress code for events?",
-    answer: "Dress codes vary by event. Cultural celebrations often encourage traditional attire like kitenge or kikoi, while casual dinners are come-as-you-are. Event details will always specify any dress recommendations."
+    question: "What happens at your events?",
+    answer: "Our events are designed for comfortable mingling—think elegant dinners, speed dating, dance nights, and cultural celebrations. Each event includes structured activities to help break the ice, plus plenty of free time for natural conversation."
   },
   {
-    question: "How is my personal information protected?",
-    answer: "We take privacy seriously. Your data is encrypted and stored securely. We never sell or share your information with third parties. Please review our Privacy Policy for complete details on our data protection practices."
+    question: "How do I connect with someone after an event?",
+    answer: "After events, you can message people you met through our secure platform. If there's mutual interest, you can exchange contact information directly. We also facilitate 'match suggestions' based on event interactions."
   },
 ];
 
@@ -63,7 +63,7 @@ const Support = () => {
     e.preventDefault();
     setIsLoading(true);
     await new Promise(resolve => setTimeout(resolve, 1000));
-    toast.success("Asante! Your message has been sent. We'll respond within 24-48 hours.");
+    toast.success("Message sent! We'll respond within 24-48 hours.");
     setFormData({ name: "", email: "", subject: "", message: "" });
     setIsLoading(false);
   };
@@ -81,10 +81,11 @@ const Support = () => {
                 Help & Support
               </span>
               <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mt-3 mb-4">
-                How Can We Help?
+                We're Here to Help
               </h1>
               <p className="text-muted-foreground text-lg leading-relaxed">
-                Find answers to common questions or reach out to our team for personalized assistance.
+                Questions about events, membership, or meeting someone special? 
+                Find answers below or reach out directly.
               </p>
             </div>
           </div>
@@ -103,8 +104,8 @@ const Support = () => {
                   <p className="text-sm text-muted-foreground mb-3">
                     Send us a message anytime
                   </p>
-                  <a href="mailto:hello@nyumbanito.ca" className="text-primary font-medium hover:underline">
-                    hello@nyumbanito.ca
+                  <a href="mailto:hello@nyumbani.ca" className="text-primary font-medium hover:underline">
+                    hello@nyumbani.ca
                   </a>
                 </CardContent>
               </Card>
@@ -127,14 +128,14 @@ const Support = () => {
               <Card variant="gradient" className="text-center">
                 <CardContent className="pt-6">
                   <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                    <MessageCircle className="w-6 h-6 text-accent" />
+                    <Shield className="w-6 h-6 text-accent" />
                   </div>
-                  <h3 className="font-display text-lg font-semibold mb-2">Live Chat</h3>
+                  <h3 className="font-display text-lg font-semibold mb-2">Safety</h3>
                   <p className="text-sm text-muted-foreground mb-3">
-                    Quick answers in real-time
+                    Report concerns
                   </p>
                   <Button variant="outline" size="sm">
-                    Start Chat
+                    Safety Tips
                   </Button>
                 </CardContent>
               </Card>
@@ -154,7 +155,7 @@ const Support = () => {
                   Frequently Asked Questions
                 </h2>
                 <p className="text-muted-foreground">
-                  Quick answers to questions you may have about our community and events.
+                  Quick answers to common questions about our community and events.
                 </p>
               </div>
 

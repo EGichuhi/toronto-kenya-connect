@@ -7,8 +7,8 @@ import { cn } from "@/lib/utils";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/events", label: "Events" },
-  { href: "/culture", label: "Culture" },
-  { href: "/community", label: "Community" },
+  { href: "/how-it-works", label: "How It Works" },
+  { href: "/success-stories", label: "Success Stories" },
   { href: "/support", label: "Support" },
 ];
 
@@ -23,10 +23,10 @@ export function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <div className="w-10 h-10 rounded-full gradient-hero flex items-center justify-center">
-              <Heart className="w-5 h-5 text-primary-foreground" />
+              <Heart className="w-5 h-5 text-primary-foreground fill-primary-foreground" />
             </div>
             <span className="font-display text-xl font-semibold text-foreground">
-              Nyumbani TO
+              Nyumbani
             </span>
           </Link>
 
@@ -54,7 +54,7 @@ export function Navbar() {
               <Link to="/login">Sign In</Link>
             </Button>
             <Button asChild>
-              <Link to="/register">Join Us</Link>
+              <Link to="/register">Join Free</Link>
             </Button>
           </div>
 
@@ -93,7 +93,7 @@ export function Navbar() {
                 <Link to="/login">Sign In</Link>
               </Button>
               <Button asChild className="w-full">
-                <Link to="/register">Join Us</Link>
+                <Link to="/register">Join Free</Link>
               </Button>
             </div>
           </nav>
